@@ -12,7 +12,6 @@
     --orange: #FF7A00;
     --gold: #FFD700;
     --bg: #0A0010;
-    --card: rgba(255,255,255,0.04);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +25,6 @@
     position: relative;
   }
 
-  /* ── Mesh gradient background ── */
   body::before {
     content: '';
     position: fixed; inset: 0;
@@ -38,14 +36,12 @@
     z-index: 0;
   }
 
-  /* ── Canvas confetti ── */
   #canvas {
     position: fixed; inset: 0;
     pointer-events: none;
     z-index: 1;
   }
 
-  /* ── Ballons ── */
   .balloon {
     position: fixed;
     bottom: -120px;
@@ -63,7 +59,6 @@
     100% { transform: translateY(-115vh) rotate(-2deg); opacity: 0; }
   }
 
-  /* ── Main layout ── */
   .page {
     position: relative;
     z-index: 10;
@@ -74,24 +69,22 @@
     justify-content: center;
     padding: 2rem 1.5rem 3rem;
     text-align: center;
-    gap: 1.6rem;
+    gap: 2rem;
   }
 
-  /* ── Logo image ── */
   .logo-img {
     width: clamp(180px, 50vw, 300px);
     animation: fadeDown 0.7s ease both;
     filter: drop-shadow(0 0 24px rgba(123,47,247,0.5));
   }
 
-  /* ── Headline ── */
   .headline {
     font-family: 'Syne', sans-serif;
     font-size: clamp(2rem, 9vw, 3.6rem);
     font-weight: 800;
     line-height: 1.08;
     max-width: 700px;
-    animation: fadeUp 0.9s 0.3s ease both;
+    animation: fadeUp 0.9s 0.25s ease both;
   }
   .headline em {
     font-style: normal;
@@ -101,19 +94,19 @@
     background-clip: text;
   }
 
-  /* ── Sub ── */
   .sub {
     color: rgba(255,255,255,0.65);
     font-size: clamp(0.95rem, 3vw, 1.15rem);
     max-width: 500px;
-    line-height: 1.65;
-    animation: fadeUp 0.9s 0.45s ease both;
+    line-height: 1.7;
+    animation: fadeUp 0.9s 0.4s ease both;
   }
   .sub strong { color: #FFD700; font-weight: 600; }
 
-  /* ── CTA Button ── */
   .cta-wrap {
-    animation: fadeUp 0.9s 0.65s ease both;
+    position: relative;
+    display: inline-block;
+    animation: fadeUp 0.9s 0.55s ease both;
   }
   .cta {
     display: inline-flex;
@@ -128,7 +121,6 @@
     font-size: clamp(1rem, 4vw, 1.25rem);
     font-weight: 700;
     color: #fff;
-    text-decoration: none;
     cursor: pointer;
     box-shadow: 0 8px 40px rgba(123,47,247,0.5);
     transition: transform 0.2s, box-shadow 0.2s;
@@ -139,40 +131,19 @@
     0%   { background-position: 0% 50%; box-shadow: 0 8px 40px rgba(123,47,247,0.5); }
     100% { background-position: 100% 50%; box-shadow: 0 8px 60px rgba(255,122,0,0.6); }
   }
-  .cta:hover {
-    transform: scale(1.05) translateY(-3px);
-    box-shadow: 0 16px 60px rgba(255,60,172,0.6);
-  }
+  .cta:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 16px 60px rgba(255,60,172,0.6); }
   .cta:active { transform: scale(0.98); }
 
   .arrow-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-flex; align-items: center; justify-content: center;
     background: rgba(255,255,255,0.2);
-    border-radius: 50%;
-    width: 32px; height: 32px;
-    font-size: 1rem;
-    transition: transform 0.3s;
+    border-radius: 50%; width: 32px; height: 32px;
+    font-size: 1rem; transition: transform 0.3s;
   }
   .cta:hover .arrow-icon { transform: translateX(4px); }
 
-  /* ── Keyframes ── */
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── Sparkle ring around CTA ── */
-  .cta-wrap { position: relative; display: inline-block; }
   .spark {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
+    position: absolute; border-radius: 50%; pointer-events: none;
     animation: sparkle 2.5s infinite ease-in-out;
   }
   .spark:nth-child(1) { width:10px;height:10px;background:#FFD700;top:-8px;left:30px;animation-delay:0s; }
@@ -183,13 +154,215 @@
     0%,100% { transform: scale(0.5); opacity: 0; }
     50%      { transform: scale(1.3); opacity: 1; }
   }
+
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeUp   { from { opacity:0; transform:translateY(24px);  } to { opacity:1; transform:translateY(0); } }
+
+  /* ════════════════════════════════
+     MODAL
+  ════════════════════════════════ */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: #110820;
+    border: 1px solid rgba(123,47,247,0.3);
+    border-radius: 24px;
+    width: 100%; max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 2rem;
+    position: relative;
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.35s ease;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 60px rgba(123,47,247,0.2);
+  }
+  .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: rgba(255,255,255,0.08); border: none;
+    color: #fff; border-radius: 50%; width: 34px; height: 34px;
+    font-size: 1.1rem; cursor: pointer; transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.18); }
+
+  /* Steps indicator */
+  .steps {
+    display: flex; gap: 0.4rem; justify-content: center; margin-bottom: 1.8rem;
+  }
+  .step-dot {
+    height: 4px; border-radius: 2px;
+    background: rgba(255,255,255,0.15);
+    transition: all 0.3s;
+    flex: 1; max-width: 48px;
+  }
+  .step-dot.active { background: linear-gradient(90deg, #7B2FF7, #FF3CAC); }
+  .step-dot.done   { background: rgba(123,47,247,0.5); }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 800;
+    margin-bottom: 0.4rem;
+    background: linear-gradient(90deg, #fff, rgba(255,255,255,0.7));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .step-sub {
+    color: rgba(255,255,255,0.45); font-size: 0.85rem; margin-bottom: 1.5rem;
+  }
+
+  /* Form fields */
+  .field { margin-bottom: 1rem; text-align: left; }
+  .field label {
+    display: block; font-size: 0.8rem; font-weight: 600;
+    color: rgba(255,255,255,0.5); text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 0.4rem;
+  }
+  .field input, .field select {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+  .field input::placeholder { color: rgba(255,255,255,0.25); }
+  .field input:focus, .field select:focus {
+    border-color: rgba(123,47,247,0.6);
+    box-shadow: 0 0 0 3px rgba(123,47,247,0.15);
+  }
+  .field select option { background: #1a0830; color: #fff; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+  /* Calendar */
+  .cal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.8rem;
+  }
+  .cal-month {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+  }
+  .cal-nav {
+    background: rgba(255,255,255,0.08); border: none; color: #fff;
+    border-radius: 8px; width: 32px; height: 32px; cursor: pointer;
+    font-size: 1rem; transition: background 0.2s;
+  }
+  .cal-nav:hover { background: rgba(123,47,247,0.4); }
+
+  .cal-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 4px; margin-bottom: 1rem;
+  }
+  .cal-day-name {
+    text-align: center; font-size: 0.7rem; color: rgba(255,255,255,0.3);
+    font-weight: 600; padding: 4px 0; text-transform: uppercase;
+  }
+  .cal-day {
+    aspect-ratio: 1; border-radius: 8px; border: none;
+    background: transparent; color: #fff; font-size: 0.85rem;
+    cursor: pointer; transition: all 0.15s; display: flex;
+    align-items: center; justify-content: center;
+  }
+  .cal-day:hover:not(:disabled) { background: rgba(123,47,247,0.3); }
+  .cal-day.selected { background: linear-gradient(135deg, #7B2FF7, #FF3CAC); box-shadow: 0 4px 16px rgba(123,47,247,0.4); }
+  .cal-day:disabled { color: rgba(255,255,255,0.15); cursor: default; }
+  .cal-day.today { border: 1px solid rgba(255,215,0,0.4); color: #FFD700; }
+  .cal-day.empty { background: transparent; cursor: default; }
+
+  /* Time slots */
+  .slots-label {
+    font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.5);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem;
+  }
+  .slots {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .slot {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; padding: 0.55rem;
+    text-align: center; font-size: 0.85rem; cursor: pointer;
+    transition: all 0.15s; color: rgba(255,255,255,0.8);
+  }
+  .slot:hover { border-color: rgba(123,47,247,0.5); background: rgba(123,47,247,0.15); }
+  .slot.selected {
+    background: linear-gradient(135deg, rgba(123,47,247,0.5), rgba(255,60,172,0.4));
+    border-color: #7B2FF7; color: #fff; font-weight: 600;
+    box-shadow: 0 4px 16px rgba(123,47,247,0.3);
+  }
+
+  /* Nav buttons */
+  .modal-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+  .btn-back {
+    flex: 1; padding: 0.85rem;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px; color: #fff; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-back:hover { background: rgba(255,255,255,0.13); }
+  .btn-next {
+    flex: 2; padding: 0.85rem;
+    background: linear-gradient(135deg, #7B2FF7, #FF3CAC);
+    border: none; border-radius: 12px; color: #fff;
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+    box-shadow: 0 6px 24px rgba(123,47,247,0.4);
+  }
+  .btn-next:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-next:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+  /* Confirmation screen */
+  .confirm-screen { text-align: center; padding: 1rem 0; }
+  .confirm-icon {
+    font-size: 3.5rem; margin-bottom: 1rem;
+    animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .confirm-title {
+    font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .confirm-sub { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.6; }
+  .confirm-card {
+    background: rgba(123,47,247,0.1); border: 1px solid rgba(123,47,247,0.25);
+    border-radius: 14px; padding: 1rem 1.2rem; margin: 1.2rem 0;
+    text-align: left; font-size: 0.9rem; line-height: 1.9;
+    color: rgba(255,255,255,0.75);
+  }
+  .confirm-card strong { color: #fff; }
+
+  /* Error */
+  .field-error { color: #FF6B6B; font-size: 0.78rem; margin-top: 0.3rem; display: none; }
+  .field.has-error input, .field.has-error select { border-color: #FF6B6B; }
+  .field.has-error .field-error { display: block; }
+
+  /* Step panel */
+  .step-panel { display: none; }
+  .step-panel.active { display: block; }
 </style>
 </head>
 <body>
 
 <canvas id="canvas"></canvas>
-
-<!-- Balloons injected by JS -->
 
 <div class="page">
   <img class="logo-img" src="https://i.ibb.co/q8cvY9M/logo-fortunia.png" alt="Fortun'IA">
@@ -206,28 +379,299 @@
   </p>
 
   <div class="cta-wrap">
-    <span class="spark"></span>
-    <span class="spark"></span>
-    <span class="spark"></span>
-    <span class="spark"></span>
-    <a class="cta" href="https://fortunia.vercel.app/" target="_blank" rel="noopener">
+    <span class="spark"></span><span class="spark"></span>
+    <span class="spark"></span><span class="spark"></span>
+    <button class="cta" onclick="openModal()">
       Je demande ma démo gratuite
       <span class="arrow-icon">→</span>
-    </a>
+    </button>
   </div>
+</div>
 
+<!-- ════ MODAL ════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <!-- Progress dots -->
+    <div class="steps">
+      <div class="step-dot active" id="dot0"></div>
+      <div class="step-dot" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+    </div>
+
+    <!-- ── STEP 1 : Infos perso ── -->
+    <div class="step-panel active" id="step0">
+      <div class="step-title">Qui êtes-vous ? 👋</div>
+      <div class="step-sub">Quelques infos pour personnaliser votre démo</div>
+
+      <div class="row">
+        <div class="field" id="f-prenom">
+          <label>Prénom</label>
+          <input type="text" id="prenom" placeholder="Marie">
+          <div class="field-error">Champ requis</div>
+        </div>
+        <div class="field" id="f-nom">
+          <label>Nom</label>
+          <input type="text" id="nom" placeholder="Dupont">
+          <div class="field-error">Champ requis</div>
+        </div>
+      </div>
+
+      <div class="field" id="f-email">
+        <label>Adresse email</label>
+        <input type="email" id="email" placeholder="marie@cabinet.fr">
+        <div class="field-error">Email invalide</div>
+      </div>
+
+      <div class="field" id="f-tel">
+        <label>Téléphone</label>
+        <input type="tel" id="tel" placeholder="+33 6 00 00 00 00">
+        <div class="field-error">Champ requis</div>
+      </div>
+
+      <div class="field" id="f-profession">
+        <label>Votre profession</label>
+        <select id="profession">
+          <option value="">— Sélectionnez —</option>
+          <option>Médecin généraliste</option>
+          <option>Médecin spécialiste</option>
+          <option>Avocat / Juriste</option>
+          <option>Expert-comptable</option>
+          <option>Notaire</option>
+          <option>Kinésithérapeute</option>
+          <option>Dentiste</option>
+          <option>Psychologue / Psychothérapeute</option>
+          <option>Architecte</option>
+          <option>Consultant indépendant</option>
+          <option>Autre profession libérale</option>
+        </select>
+        <div class="field-error">Champ requis</div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-next" style="flex:1" onclick="goStep(1)">Continuer →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 2 : Calendrier ── -->
+    <div class="step-panel" id="step1">
+      <div class="step-title">Choisissez votre créneau 📅</div>
+      <div class="step-sub">Lundi – Vendredi · Démo de 30 minutes</div>
+
+      <div class="cal-header">
+        <button class="cal-nav" onclick="prevMonth()">‹</button>
+        <div class="cal-month" id="calMonth"></div>
+        <button class="cal-nav" onclick="nextMonth()">›</button>
+      </div>
+
+      <div class="cal-grid" id="calGrid"></div>
+
+      <div id="slotsSection" style="display:none">
+        <div class="slots-label">Créneaux disponibles</div>
+        <div class="slots" id="slotsGrid"></div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-back" onclick="goStep(0)">← Retour</button>
+        <button class="btn-next" id="btnStep2" onclick="goStep(2)" disabled>Confirmer →</button>
+      </div>
+    </div>
+
+    <!-- ── STEP 3 : Confirmation ── -->
+    <div class="step-panel" id="step2">
+      <div class="confirm-screen">
+        <div class="confirm-icon">🎉</div>
+        <div class="confirm-title">C'est réservé !</div>
+        <div class="confirm-sub">Votre démo Fortun'IA est confirmée.<br>Nous vous contacterons très prochainement.</div>
+        <div class="confirm-card" id="confirmCard"></div>
+        <button class="btn-next" style="width:100%;margin-top:0.5rem" onclick="closeModal()">Fermer ✓</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <script>
-/* ── Confetti canvas ── */
+/* ════════════════════════════════
+   MODAL LOGIC
+════════════════════════════════ */
+let currentStep = 0;
+let selectedDate = null;
+let selectedSlot = null;
+let calYear, calMonth;
+
+const today = new Date();
+
+function openModal() {
+  currentStep = 0;
+  selectedDate = null;
+  selectedSlot = null;
+  calYear = today.getFullYear();
+  calMonth = today.getMonth();
+  showStep(0);
+  renderCal();
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step-panel').forEach((p,i) => p.classList.toggle('active', i===n));
+  document.querySelectorAll('.step-dot').forEach((d,i) => {
+    d.classList.toggle('active', i===n);
+    d.classList.toggle('done', i<n);
+  });
+  currentStep = n;
+}
+
+/* ── Validation step 1 ── */
+function goStep(n) {
+  if (n === 1) {
+    let ok = true;
+    const checks = [
+      ['f-prenom', () => document.getElementById('prenom').value.trim() !== ''],
+      ['f-nom',    () => document.getElementById('nom').value.trim() !== ''],
+      ['f-email',  () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(document.getElementById('email').value)],
+      ['f-tel',    () => document.getElementById('tel').value.trim() !== ''],
+      ['f-profession', () => document.getElementById('profession').value !== ''],
+    ];
+    checks.forEach(([id, fn]) => {
+      const el = document.getElementById(id);
+      if (!fn()) { el.classList.add('has-error'); ok = false; }
+      else el.classList.remove('has-error');
+    });
+    if (!ok) return;
+  }
+  if (n === 2) {
+    if (!selectedDate || !selectedSlot) return;
+    buildConfirm();
+  }
+  showStep(n);
+}
+
+/* ── Calendar ── */
+const DAYS = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const SLOTS = ['09h00','09h30','10h00','10h30','11h00','11h30','14h00','14h30','15h00','15h30','16h00','16h30'];
+
+function renderCal() {
+  document.getElementById('calMonth').textContent = MONTHS[calMonth] + ' ' + calYear;
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  DAYS.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-day-name';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const first = new Date(calYear, calMonth, 1);
+  let startDay = first.getDay(); // 0=Sun
+  startDay = startDay === 0 ? 6 : startDay - 1; // Mon=0
+
+  for (let i = 0; i < startDay; i++) {
+    const el = document.createElement('div');
+    el.className = 'cal-day empty';
+    grid.appendChild(el);
+  }
+
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(calYear, calMonth, d);
+    const dow = date.getDay(); // 0=Sun,6=Sat
+    const isWeekend = dow === 0 || dow === 6;
+    const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    const el = document.createElement('button');
+    el.className = 'cal-day';
+    el.textContent = d;
+
+    const isToday = date.toDateString() === today.toDateString();
+    if (isToday) el.classList.add('today');
+
+    if (isWeekend || isPast) {
+      el.disabled = true;
+    } else {
+      const key = date.toDateString();
+      if (selectedDate && selectedDate.toDateString() === key) el.classList.add('selected');
+      el.onclick = () => selectDate(date);
+    }
+    grid.appendChild(el);
+  }
+}
+
+function selectDate(date) {
+  selectedDate = date;
+  selectedSlot = null;
+  document.getElementById('btnStep2').disabled = true;
+  renderCal();
+  renderSlots();
+  document.getElementById('slotsSection').style.display = 'block';
+}
+
+function renderSlots() {
+  const grid = document.getElementById('slotsGrid');
+  grid.innerHTML = '';
+  SLOTS.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'slot' + (selectedSlot === s ? ' selected' : '');
+    el.textContent = s;
+    el.onclick = () => { selectedSlot = s; renderSlots(); document.getElementById('btnStep2').disabled = false; };
+    grid.appendChild(el);
+  });
+}
+
+function prevMonth() {
+  calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
+  selectedDate = null; selectedSlot = null;
+  document.getElementById('slotsSection').style.display = 'none';
+  document.getElementById('btnStep2').disabled = true;
+  renderCal();
+}
+function nextMonth() {
+  calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
+  selectedDate = null; selectedSlot = null;
+  document.getElementById('slotsSection').style.display = 'none';
+  document.getElementById('btnStep2').disabled = true;
+  renderCal();
+}
+
+/* ── Confirm card ── */
+function buildConfirm() {
+  const prenom = document.getElementById('prenom').value.trim();
+  const nom    = document.getElementById('nom').value.trim();
+  const email  = document.getElementById('email').value.trim();
+  const tel    = document.getElementById('tel').value.trim();
+  const prof   = document.getElementById('profession').value;
+  const dateStr = selectedDate.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+
+  document.getElementById('confirmCard').innerHTML = `
+    <div>👤 <strong>${prenom} ${nom}</strong></div>
+    <div>💼 ${prof}</div>
+    <div>📧 ${email}</div>
+    <div>📱 ${tel}</div>
+    <div>📅 ${dateStr.charAt(0).toUpperCase() + dateStr.slice(1)}</div>
+    <div>🕐 ${selectedSlot}</div>
+  `;
+}
+
+/* ════════════════════════════════
+   CONFETTI
+════════════════════════════════ */
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 let W, H, particles = [];
 
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
 resize();
 window.addEventListener('resize', resize);
 
@@ -235,52 +679,31 @@ const colors = ['#7B2FF7','#FF3CAC','#FF7A00','#FFD700','#c97bff','#fff'];
 
 function spawnParticle() {
   return {
-    x: Math.random() * W,
-    y: -12,
-    r: Math.random() * 5 + 3,
-    color: colors[Math.floor(Math.random() * colors.length)],
-    vx: (Math.random() - 0.5) * 2,
-    vy: Math.random() * 2 + 1.5,
-    tilt: Math.random() * Math.PI * 2,
-    tiltSpeed: (Math.random() - 0.5) * 0.12,
+    x: Math.random()*W, y: -12,
+    r: Math.random()*5+3,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    vx: (Math.random()-0.5)*2,
+    vy: Math.random()*2+1.5,
+    tilt: Math.random()*Math.PI*2,
+    tiltSpeed: (Math.random()-0.5)*0.12,
     alpha: 1,
-    shape: Math.random() > 0.5 ? 'rect' : 'circle'
+    shape: Math.random()>0.5?'rect':'circle'
   };
 }
+for (let i=0;i<120;i++){ const p=spawnParticle(); p.y=Math.random()*H*0.6; particles.push(p); }
 
-// Spawn burst on load
-for (let i = 0; i < 120; i++) {
-  const p = spawnParticle();
-  p.y = Math.random() * H * 0.6;
-  particles.push(p);
-}
-
-let frameCount = 0;
-function animate() {
-  ctx.clearRect(0, 0, W, H);
-  frameCount++;
-  if (frameCount % 4 === 0 && particles.length < 200) particles.push(spawnParticle());
-
-  particles = particles.filter(p => p.alpha > 0.02);
-
-  for (const p of particles) {
-    p.x += p.vx;
-    p.y += p.vy;
-    p.tilt += p.tiltSpeed;
-    if (p.y > H * 0.8) p.alpha -= 0.012;
-
-    ctx.save();
-    ctx.globalAlpha = p.alpha;
-    ctx.fillStyle = p.color;
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.tilt);
-    if (p.shape === 'rect') {
-      ctx.fillRect(-p.r, -p.r * 0.5, p.r * 2, p.r);
-    } else {
-      ctx.beginPath();
-      ctx.arc(0, 0, p.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
+let fc=0;
+function animate(){
+  ctx.clearRect(0,0,W,H); fc++;
+  if(fc%4===0&&particles.length<200) particles.push(spawnParticle());
+  particles=particles.filter(p=>p.alpha>0.02);
+  for(const p of particles){
+    p.x+=p.vx; p.y+=p.vy; p.tilt+=p.tiltSpeed;
+    if(p.y>H*0.8) p.alpha-=0.012;
+    ctx.save(); ctx.globalAlpha=p.alpha; ctx.fillStyle=p.color;
+    ctx.translate(p.x,p.y); ctx.rotate(p.tilt);
+    if(p.shape==='rect') ctx.fillRect(-p.r,-p.r*0.5,p.r*2,p.r);
+    else{ ctx.beginPath(); ctx.arc(0,0,p.r,0,Math.PI*2); ctx.fill(); }
     ctx.restore();
   }
   requestAnimationFrame(animate);
@@ -288,38 +711,26 @@ function animate() {
 animate();
 
 /* ── Balloons ── */
-const balloonColors = [
-  ['#7B2FF7','#5a20c4'],
-  ['#FF3CAC','#c4257d'],
-  ['#FF7A00','#c45c00'],
-  ['#FFD700','#c4a200'],
-  ['#c97bff','#9a4de0'],
-];
-
-function makeBalloon() {
-  const [fill, dark] = balloonColors[Math.floor(Math.random() * balloonColors.length)];
-  const el = document.createElement('div');
-  el.className = 'balloon';
-  el.style.left = Math.random() * 90 + 5 + 'vw';
-  const dur = Math.random() * 6 + 7;
-  el.style.animationDuration = dur + 's';
-  el.style.animationDelay = Math.random() * 3 + 's';
-  el.style.width = (Math.random() * 25 + 45) + 'px';
-  el.innerHTML = `
-    <svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="30" cy="30" rx="24" ry="28" fill="${fill}" opacity="0.92"/>
-      <ellipse cx="22" cy="18" rx="7" ry="5" fill="white" opacity="0.25"/>
-      <polygon points="30,58 27,64 33,64" fill="${dark}"/>
-      <line x1="30" y1="64" x2="30" y2="78" stroke="${dark}" stroke-width="1.5" stroke-dasharray="2,2"/>
-    </svg>`;
+const balloonColors=[['#7B2FF7','#5a20c4'],['#FF3CAC','#c4257d'],['#FF7A00','#c45c00'],['#FFD700','#c4a200'],['#c97bff','#9a4de0']];
+function makeBalloon(){
+  const [fill,dark]=balloonColors[Math.floor(Math.random()*balloonColors.length)];
+  const el=document.createElement('div'); el.className='balloon';
+  el.style.left=Math.random()*90+5+'vw';
+  const dur=Math.random()*6+7;
+  el.style.animationDuration=dur+'s';
+  el.style.animationDelay=Math.random()*3+'s';
+  el.style.width=(Math.random()*25+45)+'px';
+  el.innerHTML=`<svg viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="30" cy="30" rx="24" ry="28" fill="${fill}" opacity="0.92"/>
+    <ellipse cx="22" cy="18" rx="7" ry="5" fill="white" opacity="0.25"/>
+    <polygon points="30,58 27,64 33,64" fill="${dark}"/>
+    <line x1="30" y1="64" x2="30" y2="78" stroke="${dark}" stroke-width="1.5" stroke-dasharray="2,2"/>
+  </svg>`;
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), (dur + 4) * 1000);
+  setTimeout(()=>el.remove(),(dur+4)*1000);
 }
-
-// Initial burst
-for (let i = 0; i < 10; i++) setTimeout(makeBalloon, i * 300);
-// Continuous
-setInterval(makeBalloon, 1800);
+for(let i=0;i<10;i++) setTimeout(makeBalloon,i*300);
+setInterval(makeBalloon,1800);
 </script>
 </body>
 </html>
