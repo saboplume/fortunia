@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophie — IA Kiné | Fortun'IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fff8f2;--card:#ffffff;--panel:#fff2e8;
+  --purple:#8B2FE8;--pink:#E8306A;--orange:#F5A623;
+  --grad:linear-gradient(135deg,#8B2FE8,#E8306A,#F5A623);
+  --border:#f0d8c8;--text:#2a1810;--muted:#a08070;--light:#fff5ee;
+}
+body{font-family:'Outfit',sans-serif;background:var(--bg);height:100vh;display:flex;flex-direction:column;overflow:hidden;color:var(--text)}
+
+header{position:relative;z-index:10;background:linear-gradient(135deg,var(--purple),var(--pink),var(--orange));padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;box-shadow:0 4px 20px rgba(139,47,232,.25)}
+.h-left{display:flex;align-items:center;gap:14px}
+.h-av{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;font-size:22px}
+.h-name{font-size:19px;font-weight:800;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.15)}
+.h-sub{font-size:10px;color:rgba(255,255,255,.75);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.h-badge{background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);border-radius:50px;padding:7px 16px;font-size:10px;color:#fff;font-weight:700;letter-spacing:.5px}
+
+/* KPIs */
+.kpis{background:#fff;border-bottom:1px solid var(--border);padding:10px 24px;display:flex;gap:0;flex-shrink:0}
+.kpi{flex:1;text-align:center;border-right:1px solid var(--border)}
+.kpi:last-child{border-right:none}
+.kpi-num{font-size:22px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
+.kpi-label{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+.chat{flex:1;overflow-y:auto;padding:16px 20px 8px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:rgba(139,47,232,.15) transparent}
+.row{display:flex;align-items:flex-end;gap:10px}
+.row.user{flex-direction:row-reverse}
+.av{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px}
+.av.f{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-size:13px;font-weight:800;box-shadow:0 4px 14px rgba(139,47,232,.2)}
+.av.u{background:linear-gradient(135deg,var(--pink),var(--orange));color:#fff;font-size:13px;font-weight:800;box-shadow:0 4px 14px rgba(232,48,106,.2)}
+.bwrap{display:flex;flex-direction:column;gap:3px;max-width:78%}
+.row.user .bwrap{align-items:flex-end}
+.bubble{padding:12px 16px;font-size:13.5px;line-height:1.75;word-wrap:break-word}
+.bubble p{margin:0}.bubble p+p{margin-top:6px}
+.f-b{background:var(--card);border:1.5px solid var(--border);color:var(--text);border-radius:4px 18px 18px 18px;box-shadow:0 2px 12px rgba(139,47,232,.06)}
+.u-b{background:linear-gradient(135deg,var(--pink),var(--orange));color:#fff;border-radius:18px 4px 18px 18px;box-shadow:0 4px 16px rgba(232,48,106,.25)}
+.btime{font-size:9px;color:var(--muted);padding:0 4px}
+.typing{display:flex;gap:6px;align-items:center;padding:4px 0}
+.typing span{width:8px;height:8px;border-radius:50%;animation:pop .9s ease-in-out infinite}
+.typing span:nth-child(1){background:var(--purple);animation-delay:0s}
+.typing span:nth-child(2){background:var(--pink);animation-delay:.2s}
+.typing span:nth-child(3){background:var(--orange);animation-delay:.4s}
+@keyframes pop{0%,60%,100%{transform:scale(.7);opacity:.4}30%{transform:scale(1.15);opacity:1}}
+
+.wcard{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:18px;max-width:620px;box-shadow:0 4px 24px rgba(139,47,232,.08);position:relative;overflow:hidden}
+.wcard::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--grad)}
+.w-emoji{font-size:34px;margin-bottom:10px;display:block}
+.w-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;line-height:1.65}
+.w-title b{font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.w-story{font-size:12.5px;color:var(--muted);font-style:italic;margin-bottom:14px;line-height:1.6;padding:8px 12px;background:var(--light);border-radius:10px;border-left:3px solid var(--orange)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.pill{border-radius:50px;padding:8px 16px;font-size:12px;cursor:pointer;transition:all .2s;font-weight:600;white-space:nowrap;border:none}
+.pill.p1{background:rgba(139,47,232,.1);color:var(--purple)}
+.pill.p1:hover{background:rgba(139,47,232,.2);transform:translateY(-2px);box-shadow:0 4px 14px rgba(139,47,232,.2)}
+.pill.p2{background:rgba(232,48,106,.1);color:var(--pink)}
+.pill.p2:hover{background:rgba(232,48,106,.2);transform:translateY(-2px);box-shadow:0 4px 14px rgba(232,48,106,.2)}
+.pill.p3{background:rgba(245,166,35,.12);color:#b07010}
+.pill.p3:hover{background:rgba(245,166,35,.22);transform:translateY(-2px);box-shadow:0 4px 14px rgba(245,166,35,.2)}
+.w-sign{font-size:9px;color:#d0b8a0;margin-top:4px}
+
+.input-wrap{background:#fff;border-top:2px solid var(--border);padding:12px 20px 16px;flex-shrink:0;box-shadow:0 -4px 20px rgba(139,47,232,.05)}
+.input-box{display:flex;align-items:flex-end;gap:8px;background:var(--light);border:2px solid var(--border);border-radius:16px;padding:9px 12px;transition:border-color .2s}
+.input-box:focus-within{border-color:rgba(139,47,232,.4)}
+textarea{flex:1;background:transparent;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:13.5px;color:var(--text);resize:none;line-height:1.5;max-height:100px;scrollbar-width:none}
+textarea::placeholder{color:#c0a898}
+.send-btn{width:38px;height:38px;border-radius:50%;background:var(--grad);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s;box-shadow:0 4px 16px rgba(139,47,232,.3)}
+.send-btn:hover{transform:scale(1.1);box-shadow:0 6px 20px rgba(139,47,232,.4)}
+.send-btn svg{width:15px;height:15px;fill:#fff}
+.hint{font-size:9.5px;color:var(--muted);text-align:center;margin-top:6px}
+
+footer{text-align:center;padding:9px;border-top:1px solid var(--border);background:#fff;font-size:9.5px;color:#c0a898;letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0}
+footer span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-left">
+    <div class="h-av">💆</div>
+    <div>
+      <div class="h-name">Sophie — Kinésithérapeute</div>
+      <div class="h-sub">Lyon 6ème · Libérale · Doctolib · Zéro compétence technique requise</div>
+    </div>
+  </div>
+  <div class="h-badge">✓ SIMPLE & RAPIDE</div>
+</header>
+<div class="kpis">
+  <div class="kpi"><div class="kpi-num">3 200€</div><div class="kpi-label">Récupérés en 6 semaines</div></div>
+  <div class="kpi"><div class="kpi-num">0</div><div class="kpi-label">Formation requise</div></div>
+  <div class="kpi"><div class="kpi-num">24h</div><div class="kpi-label">Pour être opérationnelle</div></div>
+  <div class="kpi"><div class="kpi-num">100%</div><div class="kpi-label">RGPD conforme</div></div>
+</div>
+<div class="chat" id="chat">
+  <div class="row" style="align-items:flex-start">
+    <div class="av f">F</div>
+    <div class="bwrap">
+      <div class="wcard">
+        <span class="w-emoji">💆‍♀️</span>
+        <div class="w-title">Bonjour Sophie ! Je suis <b>Fortun'IA</b>.</div>
+        <div class="w-story">Avant : 3 200€ d'impayés, des factures repoussées au lendemain, des trous de planning. En 6 semaines, tout ça appartient au passé. Que voulez-vous régler aujourd'hui ?</div>
+        <div class="pills">
+          <span class="pill p1" data-q="Génère une facture de kinésithérapie pour une séance AMK 7,5 de 35€, patient Mme Dubois 52 ans, ordonnance Dr Martin">💶 Générer une facture</span>
+          <span class="pill p2" data-q="Rédige une relance SMS et email pour Mme Bernard qui doit 95€ depuis 38 jours, 2 séances impayées">📨 Relance impayé</span>
+          <span class="pill p3" data-q="Génère un message de rappel de RDV pour M. Leroy demain matin à 9h30, séance de rééducation genou">📅 Rappel RDV demain</span>
+          <span class="pill p1" data-q="Montre-moi le tableau de bord des impayés du mois : qui doit combien et depuis combien de temps">📊 Tableau impayés</span>
+          <span class="pill p2" data-q="Montre-moi le planning Doctolib de cette semaine avec le taux de remplissage et les créneaux libres">📱 Planning semaine</span>
+          <span class="pill p3" data-q="Rédige une note de séance pour patient avec lombalgie chronique, amélioration progressive, 4ème séance sur 10 prescrites">📋 Note de séance</span>
+          <span class="pill p1" data-q="Calcule combien Fortun'IA me fait gagner chaque semaine en temps et en argent récupéré">⏱️ Mon gain avec Fortun'IA</span>
+          <span class="pill p2" data-q="Raconte-moi l'histoire de Sophie avant Fortun'IA : les 3200€ impayés, le stress, et comment ça a changé">🎯 L'histoire de Sophie</span>
+        </div>
+        <div class="w-sign">Fortun'IA · Cabinet Sophie · Lyon 6ème · Opérationnelle en 24h</div>
+      </div>
+      <div class="btime" id="wtime"></div>
+    </div>
+  </div>
+</div>
+<div class="input-wrap">
+  <div class="input-box">
+    <textarea id="inp" placeholder="Dites-moi ce dont vous avez besoin en quelques mots…" rows="1" onkeydown="handleKey(event)" oninput="resize(this)"></textarea>
+    <button class="send-btn" onclick="send()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+  </div>
+  <div class="hint">Entrée pour envoyer · Maj+Entrée pour saut de ligne</div>
+</div>
+<footer>Créé par <span>Fortun'IA</span> — L'IA sur-mesure pour les professions libérales</footer>
+<script>
+const SYSTEM=`Tu es Fortun'IA, l'assistante IA sur-mesure de Sophie, kinésithérapeute libérale à Lyon.
+CONTEXTE: Sophie adorait son métier mais détestait la paperasse. Elle avait 3 200€ d'impayés accumulés et des trous de planning. En 6 semaines avec Fortun'IA elle a tout récupéré. Aujourd'hui son planning est plein et elle finit à l'heure.
+DOCTOLIB SIMULATION: Semaine du 28/04: Lundi 8 RDV (complet) | Mardi 7 RDV + 1 créneau libre 11h | Mercredi 8 RDV (complet) | Jeudi 6 RDV + 2 créneaux libres | Vendredi 5 RDV. Taux remplissage: 87%.
+IMPAYÉS EN COURS: Mme Bernard 95€ (38j) | M. Petit 70€ (22j) | Mme Chen 140€ (55j) | Total: 305€.
+FONCTIONNALITÉS: facturation automatique, relances 3 niveaux SMS+email, rappels RDV, notes de séance, simulation Doctolib, tableau de bord impayés.
+STYLE: Chaleureux, simple, accessible. Génère les documents complets et prêts à utiliser. Zéro jargon technique. Toujours rassurer sur la facilité d'utilisation.`;
+const chatEl=document.getElementById('chat');
+let history=[];
+function now(){return new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
+document.getElementById('wtime').textContent=now();
+function fmt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}
+function addMsg(role,html){
+  const row=document.createElement('div');row.className='row '+role;
+  const av=document.createElement('div');av.className='av '+(role==='fifi'?'f':'u');
+  av.textContent=role==='fifi'?'F':'S';
+  const bub=document.createElement('div');bub.className='bubble '+(role==='fifi'?'f-b':'u-b');
+  bub.innerHTML='<p>'+html+'</p>';
+  const t=document.createElement('div');t.className='btime';t.textContent=now();
+  const w=document.createElement('div');w.className='bwrap';
+  w.appendChild(bub);w.appendChild(t);row.appendChild(av);row.appendChild(w);
+  chatEl.appendChild(row);chatEl.scrollTop=chatEl.scrollHeight;return bub;
+}
+function showTyping(){
+  const row=document.createElement('div');row.className='row';row.id='typing';
+  const av=document.createElement('div');av.className='av f';av.textContent='F';
+  const bub=document.createElement('div');bub.className='bubble f-b';
+  bub.innerHTML='<div class="typing"><span></span><span></span><span></span></div>';
+  row.appendChild(av);row.appendChild(bub);chatEl.appendChild(row);chatEl.scrollTop=chatEl.scrollHeight;
+}
+async function send(text){
+  const inp=document.getElementById('inp');
+  const msg=text||inp.value.trim();if(!msg)return;
+  inp.value='';resize(inp);
+  addMsg('user',msg);history.push({role:'user',content:msg});showTyping();
+  try{
+    const res=await fetch('https://fifi-proxy.songuetb.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1500,system:SYSTEM,messages:history})});
+    const data=await res.json();
+    document.getElementById('typing')?.remove();
+    const reply=data.content?.[0]?.text||'Erreur.';
+    const bub=addMsg('fifi','');bub.innerHTML='<p>'+fmt(reply)+'</p>';
+    history.push({role:'assistant',content:reply});
+  }catch(e){document.getElementById('typing')?.remove();addMsg('fifi','Erreur de connexion.');}
+  chatEl.scrollTop=chatEl.scrollHeight;
+}
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('wtime').textContent=now();
+  document.querySelectorAll('.pill[data-q]').forEach(p=>p.addEventListener('click',()=>send(p.getAttribute('data-q'))));
+});
+</script>
+</body>
+</html>

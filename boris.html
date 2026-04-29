@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boris — IA Médecin | Fortun'IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060d14;--panel:#0b1520;--card:#0f1e2e;
+  --purple:#8B2FE8;--pink:#E8306A;--orange:#F5A623;
+  --teal:#0ABFBC;--teal2:#07878a;
+  --border:rgba(10,191,188,.18);--text:#d8eef0;--muted:rgba(216,238,240,.4);
+}
+body{font-family:'Outfit',sans-serif;background:var(--bg);height:100vh;display:flex;flex-direction:column;overflow:hidden;color:var(--text)}
+/* BG GRID */
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(10,191,188,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(10,191,188,.04) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0}
+
+header{position:relative;z-index:10;background:rgba(6,13,20,.95);border-bottom:1px solid var(--border);padding:0 24px;height:62px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--purple),var(--pink))}
+.h-left{display:flex;align-items:center;gap:12px}
+.h-av{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--purple));display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:900;color:#fff;font-family:'Outfit',sans-serif;box-shadow:0 4px 16px rgba(10,191,188,.35)}
+.h-name{font-size:17px;font-weight:800;background:linear-gradient(90deg,var(--teal),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.h-sub{font-size:9px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.h-badge{background:rgba(10,191,188,.1);border:1px solid rgba(10,191,188,.3);border-radius:50px;padding:5px 14px;font-size:9.5px;color:var(--teal);letter-spacing:1px;font-weight:600}
+
+/* STATUS BAR */
+.sbar{position:relative;z-index:10;background:rgba(10,191,188,.04);border-bottom:1px solid var(--border);padding:6px 24px;display:flex;gap:32px;flex-shrink:0}
+.sbar-item{font-size:9.5px;letter-spacing:.8px}
+.sbar-l{color:var(--muted)}
+.sbar-v{color:var(--teal);font-weight:700}
+
+/* CHAT */
+.chat{position:relative;z-index:5;flex:1;overflow-y:auto;padding:16px 20px 8px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:rgba(10,191,188,.2) transparent}
+.row{display:flex;align-items:flex-end;gap:10px}
+.row.user{flex-direction:row-reverse}
+.av{width:34px;height:34px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800}
+.av.f{background:linear-gradient(135deg,var(--teal),var(--purple));color:#fff;font-family:'Outfit',sans-serif}
+.av.u{background:rgba(139,47,232,.2);border:1px solid rgba(139,47,232,.4);color:var(--purple)}
+.bwrap{display:flex;flex-direction:column;gap:3px;max-width:80%}
+.row.user .bwrap{align-items:flex-end}
+.bubble{padding:11px 15px;font-size:13px;line-height:1.7;word-wrap:break-word;border-radius:14px}
+.bubble p{margin:0}
+.bubble p+p{margin-top:6px}
+.f-b{background:var(--card);border:1px solid var(--border);color:var(--text);border-bottom-left-radius:3px}
+.u-b{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-bottom-right-radius:3px}
+.btime{font-size:9px;color:var(--muted);padding:0 4px}
+.typing{display:flex;gap:5px;align-items:center;padding:4px 0}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:blink .9s ease-in-out infinite}
+.typing span:nth-child(2){animation-delay:.2s;background:var(--purple)}
+.typing span:nth-child(3){animation-delay:.4s;background:var(--pink)}
+@keyframes blink{0%,60%,100%{transform:scale(.8);opacity:.4}30%{transform:scale(1);opacity:1}}
+
+/* WELCOME */
+.wcard{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px;max-width:620px;position:relative;overflow:hidden}
+.wcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--purple),var(--pink))}
+.w-title{font-size:13.5px;font-weight:500;color:var(--text);margin-bottom:14px;line-height:1.65}
+.w-title b{font-size:15px;font-weight:800;background:linear-gradient(90deg,var(--teal),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.pill{background:rgba(10,191,188,.08);border:1.5px solid rgba(10,191,188,.25);border-radius:50px;padding:6px 13px;font-size:11.5px;color:var(--teal);cursor:pointer;transition:all .2s;font-weight:500;white-space:nowrap}
+.pill:hover{background:rgba(10,191,188,.18);border-color:rgba(10,191,188,.5);transform:translateY(-1px)}
+.pill.alt{background:rgba(139,47,232,.08);border-color:rgba(139,47,232,.25);color:#C084FC}
+.pill.alt:hover{background:rgba(139,47,232,.18);border-color:rgba(139,47,232,.5)}
+.w-sign{font-size:9px;color:rgba(255,255,255,.15);margin-top:4px}
+
+/* INPUT */
+.input-wrap{position:relative;z-index:10;background:rgba(6,13,20,.97);border-top:1px solid var(--border);padding:10px 20px 14px;flex-shrink:0}
+.input-box{display:flex;align-items:flex-end;gap:8px;background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:8px 10px;transition:border-color .2s}
+.input-box:focus-within{border-color:rgba(10,191,188,.4)}
+textarea{flex:1;background:transparent;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);resize:none;line-height:1.5;max-height:100px;scrollbar-width:none}
+textarea::placeholder{color:var(--muted)}
+.send-btn{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--purple));border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s;box-shadow:0 4px 14px rgba(10,191,188,.3)}
+.send-btn:hover{transform:scale(1.08)}
+.send-btn svg{width:15px;height:15px;fill:#fff}
+.hint{font-size:9.5px;color:var(--muted);text-align:right;margin-top:5px}
+
+/* FOOTER */
+footer{position:relative;z-index:10;text-align:center;padding:8px 20px;border-top:1px solid rgba(255,255,255,.05);background:var(--bg);font-size:9.5px;color:rgba(255,255,255,.15);letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0}
+footer span{background:linear-gradient(90deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-left">
+    <div class="h-av">F</div>
+    <div>
+      <div class="h-name">Boris — Médecin Généraliste</div>
+      <div class="h-sub">Assistant IA · Doctolib · Mediboard · RGPD conforme</div>
+    </div>
+  </div>
+  <div class="h-badge">● IA ACTIVE</div>
+</header>
+<div class="sbar">
+  <div class="sbar-item"><span class="sbar-l">PATIENTS: </span><span class="sbar-v">2 200</span></div>
+  <div class="sbar-item"><span class="sbar-l">DOCTOLIB: </span><span class="sbar-v">CONNECTÉ</span></div>
+  <div class="sbar-item"><span class="sbar-l">RGPD: </span><span class="sbar-v">CONFORME</span></div>
+  <div class="sbar-item"><span class="sbar-l">TEMPS GAGNÉ: </span><span class="sbar-v">+2H/JOUR</span></div>
+</div>
+<div class="chat" id="chat">
+  <div class="row" style="align-items:flex-start">
+    <div class="av f">F</div>
+    <div class="bwrap">
+      <div class="wcard">
+        <div class="w-title">Bonjour Boris ! Je suis <b>Fortun'IA</b>.<br>Avant : 2h de paperasse chaque soir. Aujourd'hui : vous quittez le cabinet à 18h30. Je connais vos 2 200 patients, vos correspondants et votre style. Que puis-je faire pour vous ? ✦</div>
+        <div class="pills">
+          <span class="pill" data-q="Rédige un compte-rendu pour un patient de 67 ans, hypertension, consultation de suivi, TA 148/92">📋 Compte-rendu consultation</span>
+          <span class="pill" data-q="Ordonnance renouvellement Metformine 1000mg diabète type 2, patient 58 ans, stable">💊 Renouvellement ordonnance</span>
+          <span class="pill" data-q="Courrier pour le Dr Fabre cardiologue : patient 72 ans, douleurs thoraciques atypiques, TA 150/95, ECG normal">📨 Courrier cardiologue</span>
+          <span class="pill" data-q="Courrier pour Dr Souza rhumatologue : femme 48 ans, lombalgies chroniques 4 mois, Lasègue négatif">📨 Courrier rhumatologue</span>
+          <span class="pill" data-q="Montre-moi le planning Doctolib du jour avec les patients et les motifs de consultation">📅 Planning Doctolib du jour</span>
+          <span class="pill" data-q="Résumé du dossier patient : homme 65 ans, diabète type 2, HTA, dyslipidémie, traitement en cours">🔍 Résumé dossier patient</span>
+          <span class="pill alt" data-q="Traduis ce compte-rendu en anglais pour un patient étranger">🌍 Traduire en anglais</span>
+          <span class="pill alt" data-q="J'ai une journée chargée et je commence à ressentir du stress, donne-moi des conseils rapides">😌 Bien-être médecin</span>
+          <span class="pill alt" data-q="Raconte-moi comment Boris travaillait avant Fortun'IA et ce qui a changé pour lui">🎯 L'histoire de Boris</span>
+        </div>
+        <div class="w-sign">Fortun'IA · Cabinet Boris · Lyon 3ème</div>
+      </div>
+      <div class="btime" id="wtime"></div>
+    </div>
+  </div>
+</div>
+<div class="input-wrap">
+  <div class="input-box">
+    <textarea id="inp" placeholder="Décrivez la situation clinique ou posez votre question…" rows="1" onkeydown="handleKey(event)" oninput="resize(this)"></textarea>
+    <button class="send-btn" onclick="send()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+  </div>
+  <div class="hint">Entrée pour envoyer · Maj+Entrée pour saut de ligne</div>
+</div>
+<footer>Créé par <span>Fortun'IA</span> — L'IA sur-mesure pour les professions libérales</footer>
+<script>
+const SYSTEM=`Tu es Fortun'IA, l'assistante IA sur-mesure du Dr Boris, médecin généraliste à Lyon.
+CONTEXTE: Boris avait 2h de paperasse chaque soir. Sa famille ne le voyait plus. Depuis Fortun'IA il rentre à 18h30.
+Tu connais: 2 200 patients, correspondants habituels (Dr Fabre cardiologue, Dr Souza rhumatologue, Dr Petit dermatologue), style de rédaction exact de Boris, protocoles du cabinet.
+DOCTOLIB SIMULATION: Planning du jour (28/04): 9h M. Dupont 68ans suivi HTA | 9h30 Mme Laurent 45ans renouvellement | 10h M. Girard 72ans douleurs thoraciques | 10h30 Mme Chen 34ans grossesse S12 | 11h Dr Moreau résultats biopsie | 14h pédiatrie x3 | 15h30 urgence | 16h retraités x4. 6 patients en attente de résultats.
+FONCTIONNALITÉS: comptes-rendus (20 secondes), ordonnances, courriers confrères, résumés dossiers, multi-langues, simulation Doctolib.
+STYLE: Direct, médical, professionnel. Génère les documents complets. Utilise les abréviations médicales (TA, FC, IMC, ATCDs). Toujours terminer par "Confraternellement, Dr Boris [Nom]" pour les courriers.
+Réponds en français sauf si on demande une autre langue.`;
+const chatEl=document.getElementById('chat');
+let history=[];
+function now(){return new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
+document.getElementById('wtime').textContent=now();
+function fmt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}
+function addMsg(role,html){
+  const row=document.createElement('div');row.className='row '+role;
+  const av=document.createElement('div');av.className='av '+(role==='fifi'?'f':'u');av.textContent=role==='fifi'?'F':'👤';
+  const bub=document.createElement('div');bub.className='bubble '+(role==='fifi'?'f-b':'u-b');
+  bub.innerHTML='<p>'+html+'</p>';
+  const t=document.createElement('div');t.className='btime';t.textContent=now();
+  const w=document.createElement('div');w.className='bwrap';
+  w.appendChild(bub);w.appendChild(t);row.appendChild(av);row.appendChild(w);
+  chatEl.appendChild(row);chatEl.scrollTop=chatEl.scrollHeight;return bub;
+}
+function showTyping(){
+  const row=document.createElement('div');row.className='row';row.id='typing';
+  const av=document.createElement('div');av.className='av f';av.textContent='F';
+  const bub=document.createElement('div');bub.className='bubble f-b';
+  bub.innerHTML='<div class="typing"><span></span><span></span><span></span></div>';
+  row.appendChild(av);row.appendChild(bub);chatEl.appendChild(row);chatEl.scrollTop=chatEl.scrollHeight;
+}
+async function send(text){
+  const inp=document.getElementById('inp');
+  const msg=text||inp.value.trim();if(!msg)return;
+  inp.value='';resize(inp);
+  addMsg('user',msg);history.push({role:'user',content:msg});showTyping();
+  try{
+    const res=await fetch('https://fifi-proxy.songuetb.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1500,system:SYSTEM,messages:history})});
+    const data=await res.json();
+    document.getElementById('typing')?.remove();
+    const reply=data.content?.[0]?.text||'Erreur.';
+    const bub=addMsg('fifi','');bub.innerHTML='<p>'+fmt(reply)+'</p>';
+    history.push({role:'assistant',content:reply});
+  }catch(e){document.getElementById('typing')?.remove();addMsg('fifi','Erreur de connexion.');}
+  chatEl.scrollTop=chatEl.scrollHeight;
+}
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('wtime').textContent=now();
+  document.querySelectorAll('.pill[data-q]').forEach(p=>p.addEventListener('click',()=>send(p.getAttribute('data-q'))));
+});
+</script>
+</body>
+</html>

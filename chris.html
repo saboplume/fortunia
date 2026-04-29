@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chris — IA Avocat | Fortun'IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#08060e;--panel:#100d1a;--card:#16122a;
+  --gold:#c9a84c;--gold2:#f0d080;
+  --purple:#8B2FE8;--pink:#E8306A;
+  --border:rgba(201,168,76,.18);--text:#ede0c8;--muted:rgba(237,224,200,.38);
+}
+body{font-family:'Outfit',sans-serif;background:var(--bg);height:100vh;display:flex;flex-direction:column;overflow:hidden;color:var(--text)}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 20%,rgba(139,47,232,.12) 0%,transparent 55%),radial-gradient(ellipse at 85% 80%,rgba(201,168,76,.08) 0%,transparent 55%);pointer-events:none;z-index:0}
+
+header{position:relative;z-index:10;background:rgba(8,6,14,.97);border-bottom:1px solid var(--border);padding:0 28px;height:66px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)}
+.h-left{display:flex;align-items:center;gap:14px}
+.h-seal{width:46px;height:46px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(201,168,76,.08);box-shadow:0 0 20px rgba(201,168,76,.2)}
+.h-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--text);letter-spacing:.3px}
+.h-sub{font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.h-badge{display:flex;align-items:center;gap:7px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.3);border-radius:50px;padding:6px 16px;font-size:9.5px;color:var(--gold);letter-spacing:1px;font-weight:600}
+.h-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.sbar{position:relative;z-index:10;background:rgba(201,168,76,.04);border-bottom:1px solid var(--border);padding:7px 28px;display:flex;gap:36px;flex-shrink:0}
+.sbar-item{font-size:9.5px;letter-spacing:.8px}
+.sbar-l{color:var(--muted)}
+.sbar-v{color:var(--gold);font-weight:700}
+
+.chat{position:relative;z-index:5;flex:1;overflow-y:auto;padding:18px 24px 8px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;scrollbar-color:rgba(201,168,76,.15) transparent}
+.row{display:flex;align-items:flex-end;gap:10px}
+.row.user{flex-direction:row-reverse}
+.av{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px}
+.av.f{border-radius:50%;background:rgba(201,168,76,.12);border:1.5px solid rgba(201,168,76,.4);color:var(--gold);font-weight:800;font-family:'Cormorant Garamond',serif;font-size:18px}
+.av.u{border-radius:10px;background:rgba(139,47,232,.15);border:1px solid rgba(139,47,232,.3);color:#C084FC;font-size:12px;font-weight:700}
+.bwrap{display:flex;flex-direction:column;gap:3px;max-width:78%}
+.row.user .bwrap{align-items:flex-end}
+.bubble{padding:13px 17px;font-size:13px;line-height:1.75;word-wrap:break-word}
+.bubble p{margin:0}.bubble p+p{margin-top:7px}
+.f-b{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:3px 16px 16px 16px}
+.u-b{background:linear-gradient(135deg,rgba(139,47,232,.8),rgba(232,48,106,.8));color:#fff;border-radius:16px 3px 16px 16px;backdrop-filter:blur(4px)}
+.f-b::before{display:block;font-size:8.5px;color:rgba(201,168,76,.6);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;content:'ASSISTANT FORTUN\'IA'}
+.u-b::before{display:block;font-size:8.5px;color:rgba(255,255,255,.5);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;content:'CHRIS'}
+.btime{font-size:9px;color:var(--muted);padding:0 4px}
+.typing{display:flex;gap:5px;align-items:center;padding:4px 0}
+.typing span{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:bounce .9s ease-in-out infinite}
+.typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-8px);opacity:1}}
+
+.wcard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;max-width:640px;position:relative;overflow:hidden}
+.wcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent)}
+.w-title{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--text);margin-bottom:16px;line-height:1.7;font-style:italic}
+.w-title b{font-style:normal;font-weight:700;color:var(--gold2)}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.pill{background:rgba(201,168,76,.06);border:1.5px solid rgba(201,168,76,.25);border-radius:6px;padding:7px 14px;font-size:11.5px;color:rgba(237,224,200,.8);cursor:pointer;transition:all .2s;font-weight:500}
+.pill:hover{background:rgba(201,168,76,.14);border-color:rgba(201,168,76,.5);color:var(--gold);transform:translateY(-1px)}
+.pill.sec{background:rgba(139,47,232,.06);border-color:rgba(139,47,232,.25);color:#C084FC}
+.pill.sec:hover{background:rgba(139,47,232,.14);border-color:rgba(139,47,232,.45)}
+.w-sign{font-size:9px;color:rgba(255,255,255,.1);margin-top:6px;font-style:italic}
+
+.input-wrap{position:relative;z-index:10;background:rgba(8,6,14,.97);border-top:1px solid var(--border);padding:12px 24px 16px;flex-shrink:0}
+.input-box{display:flex;align-items:flex-end;gap:8px;background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:9px 12px;transition:border-color .2s}
+.input-box:focus-within{border-color:rgba(201,168,76,.4)}
+textarea{flex:1;background:transparent;border:none;outline:none;font-family:'Outfit',sans-serif;font-size:13px;color:var(--text);resize:none;line-height:1.5;max-height:100px;scrollbar-width:none}
+textarea::placeholder{color:var(--muted)}
+.send-btn{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .2s;box-shadow:0 4px 14px rgba(201,168,76,.3)}
+.send-btn:hover{transform:scale(1.08)}
+.send-btn svg{width:15px;height:15px;fill:#1a0830}
+.hint{font-size:9px;color:var(--muted);text-align:right;margin-top:5px}
+
+footer{position:relative;z-index:10;text-align:center;padding:8px;border-top:1px solid rgba(255,255,255,.04);background:var(--bg);font-size:9.5px;color:rgba(255,255,255,.12);letter-spacing:1.5px;text-transform:uppercase;flex-shrink:0}
+footer span{color:var(--gold);font-weight:700}
+</style>
+</head>
+<body>
+<header>
+  <div class="h-left">
+    <div class="h-seal">⚖️</div>
+    <div>
+      <div class="h-name">Chris — Avocat en Cabinet</div>
+      <div class="h-sub">Droit des affaires · Paris · Secret professionnel garanti</div>
+    </div>
+  </div>
+  <div class="h-badge"><div class="h-dot"></div>SECRET PRO ACTIF</div>
+</header>
+<div class="sbar">
+  <div class="sbar-item"><span class="sbar-l">DOSSIERS ACTIFS: </span><span class="sbar-v">45</span></div>
+  <div class="sbar-item"><span class="sbar-l">CONFIDENTIALITÉ: </span><span class="sbar-v">MAXIMALE</span></div>
+  <div class="sbar-item"><span class="sbar-l">RGPD: </span><span class="sbar-v">CONFORME</span></div>
+  <div class="sbar-item"><span class="sbar-l">CA: </span><span class="sbar-v">+18% EN 3 MOIS</span></div>
+</div>
+<div class="chat" id="chat">
+  <div class="row" style="align-items:flex-start">
+    <div class="av f">F</div>
+    <div class="bwrap">
+      <div class="wcard">
+        <div class="w-title">Bonjour, Me Chris. Je suis <b>Fortun'IA</b>.<br>Avant : noyé sous l'administratif, moins de temps pour vos clients. Aujourd'hui : +18% de CA en 3 mois. Je gère vos courriers, factures et relances. Que souhaitez-vous traiter ? ✦</div>
+        <div class="pills">
+          <span class="pill" data-q="Rédige un courrier de mise en demeure pour impayé client de 8500€, facture du 15 février, 3 relances sans réponse">⚖️ Mise en demeure impayé</span>
+          <span class="pill" data-q="Génère une facture d'honoraires de 4200€ HT pour mission de conseil en droit des sociétés, client SAS Innov, dossier de création">💶 Facture d'honoraires</span>
+          <span class="pill" data-q="Rédige une relance niveau 1 amiable pour client qui n'a pas payé facture de 2800€ depuis 35 jours">📨 Relance niveau 1 amiable</span>
+          <span class="pill" data-q="Rédige une relance niveau 2 ferme pour client avec 2800€ impayé depuis 55 jours, première relance ignorée">📨 Relance niveau 2 ferme</span>
+          <span class="pill" data-q="Génère une clause de confidentialité renforcée pour contrat de cession de fonds de commerce">🔒 Clause confidentialité</span>
+          <span class="pill" data-q="Montre-moi les dossiers en cours avec les délais à respecter cette semaine depuis le CRM">📁 Dossiers & délais CRM</span>
+          <span class="pill sec" data-q="Génère un argumentaire pour convaincre un prospect avocat de travailler avec Fortun'IA">💼 Argumentaire commercial</span>
+          <span class="pill sec" data-q="Raconte-moi l'histoire de Chris avant Fortun'IA et ce que ça a changé pour lui concrètement">🎯 L'histoire de Chris</span>
+        </div>
+        <div class="w-sign">Fortun'IA · Cabinet de Me Chris · Paris · Secret professionnel & RGPD garantis</div>
+      </div>
+      <div class="btime" id="wtime"></div>
+    </div>
+  </div>
+</div>
+<div class="input-wrap">
+  <div class="input-box">
+    <textarea id="inp" placeholder="Décrivez le document ou la tâche juridique…" rows="1" onkeydown="handleKey(event)" oninput="resize(this)"></textarea>
+    <button class="send-btn" onclick="send()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+  </div>
+  <div class="hint">Entrée pour envoyer · Maj+Entrée pour saut de ligne</div>
+</div>
+<footer>Créé par <span>Fortun'IA</span> — L'IA sur-mesure pour les professions libérales</footer>
+<script>
+const SYSTEM=`Tu es Fortun'IA, l'assistante IA sur-mesure de Me Chris, avocat en cabinet à Paris spécialisé droit des affaires.
+CONTEXTE: Avant Fortun'IA, Chris noyait sous l'admin répétitif. Depuis 3 mois son CA a augmenté de 18% car il passe son temps à faire du droit, pas de la paperasse.
+CRM DOSSIERS EN COURS (simulation): Dossier SARL Dupont - cession fonds commerce - délai réponse 02/05 | Dossier SAS Innov - création - RDV notaire 05/05 | Dossier Mme Laurent - divorce patrimonial - audience 08/05 | Dossier EURL Martin - litige commercial - conclusions 12/05 | 3 dossiers avec relances impayées en attente.
+FONCTIONNALITÉS: mises en demeure, factures honoraires, relances 3 niveaux, suivi dossiers, clauses juridiques, CRM simulation.
+STYLE: Professionnel, précis, juridiquement rigoureux. Génère les documents complets avec les mentions légales appropriées. Secret professionnel et RGPD garantis - rappeler si pertinent.
+Toujours générer les documents dans leur intégralité, pas de résumés.`;
+const chatEl=document.getElementById('chat');
+let history=[];
+function now(){return new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
+document.getElementById('wtime').textContent=now();
+function fmt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')}
+function addMsg(role,html){
+  const row=document.createElement('div');row.className='row '+role;
+  const av=document.createElement('div');av.className='av '+(role==='fifi'?'f':'u');
+  av.textContent=role==='fifi'?'F':'Me';
+  const bub=document.createElement('div');bub.className='bubble '+(role==='fifi'?'f-b':'u-b');
+  bub.innerHTML='<p>'+html+'</p>';
+  const t=document.createElement('div');t.className='btime';t.textContent=now();
+  const w=document.createElement('div');w.className='bwrap';
+  w.appendChild(bub);w.appendChild(t);row.appendChild(av);row.appendChild(w);
+  chatEl.appendChild(row);chatEl.scrollTop=chatEl.scrollHeight;return bub;
+}
+function showTyping(){
+  const row=document.createElement('div');row.className='row';row.id='typing';
+  const av=document.createElement('div');av.className='av f';av.textContent='F';
+  const bub=document.createElement('div');bub.className='bubble f-b';
+  bub.innerHTML='<div class="typing"><span></span><span></span><span></span></div>';
+  row.appendChild(av);row.appendChild(bub);chatEl.appendChild(row);chatEl.scrollTop=chatEl.scrollHeight;
+}
+async function send(text){
+  const inp=document.getElementById('inp');
+  const msg=text||inp.value.trim();if(!msg)return;
+  inp.value='';resize(inp);
+  addMsg('user',msg);history.push({role:'user',content:msg});showTyping();
+  try{
+    const res=await fetch('https://fifi-proxy.songuetb.workers.dev',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1500,system:SYSTEM,messages:history})});
+    const data=await res.json();
+    document.getElementById('typing')?.remove();
+    const reply=data.content?.[0]?.text||'Erreur.';
+    const bub=addMsg('fifi','');bub.innerHTML='<p>'+fmt(reply)+'</p>';
+    history.push({role:'assistant',content:reply});
+  }catch(e){document.getElementById('typing')?.remove();addMsg('fifi','Erreur de connexion.');}
+  chatEl.scrollTop=chatEl.scrollHeight;
+}
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+function resize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('wtime').textContent=now();
+  document.querySelectorAll('.pill[data-q]').forEach(p=>p.addEventListener('click',()=>send(p.getAttribute('data-q'))));
+});
+</script>
+</body>
+</html>
