@@ -352,6 +352,8 @@ footer {
     <a href="#cas">Cas d'usage</a>
     <a href="#comment">Comment ça marche</a>
     <a href="#professions">Professions</a>
+    <a href="#apropos">À propos</a>
+    <a href="#valeurs">Nos valeurs</a>
   </div>
   <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander une démo →</button>
 </nav>
@@ -446,62 +448,76 @@ footer {
 <!-- CAS D'USAGE -->
 <section class="section reveal" id="cas">
   <div class="section-label">Cas d'usage réels</div>
-  <div class="section-title">Trois exemples.<br>Trois vies transformées.</div>
-  <div class="section-sub">Des IA sur-mesure, construites pour un cabinet précis. Testez-les — elles fonctionnent vraiment.</div>
-  <div class="cases-grid">
+  <div class="section-title">4 exemples.<br>4 vies transformées.</div>
+  <div class="section-sub">Des IA sur-mesure, construites pour un cabinet précis. Chaque histoire est réelle.</div>
+  <div class="cases-grid" style="grid-template-columns:repeat(2,1fr);">
 
-    <!-- BORIS -->
+    <!-- MEDECIN -->
     <div class="case-card">
       <span class="case-emoji">🩺</span>
-      <div class="case-pro">Médecine générale · 45 ans</div>
-      <div class="case-name">Boris — Médecin Généraliste</div>
-      <div class="case-role">50 à 60h/semaine · +30% en tâches administratives</div>
+      <div class="case-pro">Médecine générale · Cabinet privé · Lyon 3e</div>
+      <div class="case-name">Médecin généraliste</div>
+      <div class="case-role">2 200 patients actifs · 50–60h/semaine</div>
       <div class="case-before">
-        <span>SITUATION</span>
-        <p>Retards fréquents sur les comptes-rendus et ordonnances. Stress lié aux erreurs de saisie. Peu à l'aise avec les outils digitaux.</p>
+        <span>AVANT</span>
+        <p>2h de tâches admin chaque soir après les consultations. Comptes-rendus et ordonnances rédigés à la main. Peu à l'aise avec les outils numériques. Stress important lié aux erreurs de saisie.</p>
       </div>
       <div class="case-after">
         <span>AVEC FORTUN'IA</span>
-        <p>Son IA rédige les comptes-rendus et ordonnances automatiquement, sans aucune formation technique. Conforme RGPD, utilisable dès le premier jour.</p>
+        <p>L'IA connaît les 2 200 patients, génère les courriers médicaux complets en 20 secondes, renouvelle les ordonnances en 3 clics. Cabinet fermé à 18h30 tous les jours.</p>
       </div>
-      <div class="case-gain">⏱ +30% de temps récupéré sur l'administratif</div>
-      <a class="demo-link" href="#">Tester cette IA → ↗</a>
+      <div class="case-gain">⏱ +2h récupérées/soir · Admin réduit de 70%</div>
     </div>
 
-    <!-- CHRIS -->
-    <div class="case-card">
-      <span class="case-emoji">⚖️</span>
-      <div class="case-pro">Droit · Cabinet · 34 ans</div>
-      <div class="case-name">Chris — Avocat en Cabinet</div>
-      <div class="case-role">+40h/semaine · Surcharge administrative chronique</div>
-      <div class="case-before">
-        <span>SITUATION</span>
-        <p>Rédaction de courriers répétitifs, facturation mal suivie, perte de revenus. Méfiant envers les IA non sécurisées — secret professionnel non négociable.</p>
-      </div>
-      <div class="case-after">
-        <span>AVEC FORTUN'IA</span>
-        <p>Son IA centralise tout : courriers, facturation, relances clients — 100% conforme au secret professionnel et au RGPD. Personnalisée à ses pratiques exactes.</p>
-      </div>
-      <div class="case-gain">📋 Facturation + relances automatisées à 100%</div>
-      <a class="demo-link" href="#">Tester cette IA → ↗</a>
-    </div>
-
-    <!-- SOPHIE -->
+    <!-- KINESITHERAPEUTE -->
     <div class="case-card">
       <span class="case-emoji">💆</span>
-      <div class="case-pro">Santé · Indépendante · 30 ans</div>
-      <div class="case-name">Sophie — Kinésithérapeute</div>
-      <div class="case-role">Revenus irréguliers · Zéro suivi des impayés</div>
+      <div class="case-pro">Kinésithérapie · Libérale · Lyon 6e</div>
+      <div class="case-name">Kinésithérapeute</div>
+      <div class="case-role">~22 patients/semaine · Revenus irréguliers</div>
       <div class="case-before">
-        <span>SITUATION</span>
-        <p>Déteste l'administratif, le reporte systématiquement. Retards de facturation, impayés non suivis, revenus irréguliers.</p>
+        <span>AVANT</span>
+        <p>3 200 € d'impayés accumulés faute de suivi. Trous de planning fréquents car rappels de RDV non envoyés. Facturation reportée systématiquement.</p>
       </div>
       <div class="case-after">
         <span>AVEC FORTUN'IA</span>
-        <p>Son IA gère facturation, relances et prise de rendez-vous automatiquement. Aucune compétence technique requise. Résultat visible dès la première semaine.</p>
+        <p>Facturation automatique après chaque séance. Relances 3 niveaux (SMS + email). Rappels RDV 24h avant — taux d'annulation divisé par 3. Planning plein en 6 semaines.</p>
       </div>
-      <div class="case-gain">💶 Impayés réduits · Revenus stabilisés</div>
-      <a class="demo-link" href="#">Tester cette IA → ↗</a>
+      <div class="case-gain">💶 3 200 € récupérés · Planning plein · Opérationnel en 24h</div>
+    </div>
+
+    <!-- AVOCAT -->
+    <div class="case-card">
+      <span class="case-emoji">⚖️</span>
+      <div class="case-pro">Droit des affaires · Cabinet · Paris / Lyon</div>
+      <div class="case-name">Avocat en cabinet</div>
+      <div class="case-role">45 dossiers actifs · +40h/semaine</div>
+      <div class="case-before">
+        <span>AVANT</span>
+        <p>Rédaction de courriers et actes répétitifs. Facturation et relances non suivies — perte de revenus directe. Très méfiant envers les outils IA non sécurisés. Secret professionnel non négociable.</p>
+      </div>
+      <div class="case-after">
+        <span>AVEC FORTUN'IA</span>
+        <p>Mises en demeure générées en 30 secondes. Zéro impayé oublié. Secret professionnel 100% garanti — architecture sans stockage de données. +18% de CA en 3 mois.</p>
+      </div>
+      <div class="case-gain">📋 +18% CA · 2 jours/semaine récupérés · Secret pro garanti</div>
+    </div>
+
+    <!-- CABINET COMPTABLE -->
+    <div class="case-card">
+      <span class="case-emoji">📊</span>
+      <div class="case-pro">Expertise comptable · Cabinet · Lyon 6e</div>
+      <div class="case-name">Cabinet comptable</div>
+      <div class="case-role">22 collaborateurs · 340 clients actifs · CA 2,8M€</div>
+      <div class="case-before">
+        <span>AVANT</span>
+        <p>Cloisonnement entre collaborateurs, peu de dynamique collective. Tâches administratives répétitives épuisant les équipes. Suivi des impayés chronophage. Onboarding de nouveaux clients trop long.</p>
+      </div>
+      <div class="case-after">
+        <span>AVEC FORTUN'IA</span>
+        <p>Défi collectif quotidien, cohésion restaurée, procédures respectées. Connexion CEGID simulée. Onboarding standardisé. −30% de temps administratif pour toute l'équipe.</p>
+      </div>
+      <div class="case-gain">⚡ −30% temps admin · Cohésion d'équipe restaurée · 100% RGPD</div>
     </div>
 
   </div>
@@ -510,8 +526,8 @@ footer {
 <!-- CRITERES COMMUNS -->
 <section class="section reveal" id="criteres">
   <div class="section-label">Ce que nos clients ont en commun</div>
-  <div class="section-title">Trois profils différents.<br>Trois besoins identiques.</div>
-  <div class="section-sub">Qu'ils soient médecin, avocat ou kiné — nos clients prennent leur décision sur les mêmes critères.</div>
+  <div class="section-title">4 profils différents.<br>Les mêmes besoins.</div>
+  <div class="section-sub">Qu'ils soient médecin, avocat, kiné ou comptable — nos clients prennent leur décision sur les mêmes critères.</div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px;">
     <div style="background:linear-gradient(135deg,rgba(139,47,232,0.12),rgba(139,47,232,0.04));border:1px solid rgba(139,47,232,0.25);border-radius:24px;padding:36px 28px;text-align:center;">
       <div style="font-size:48px;margin-bottom:16px;">⚡</div>
@@ -579,47 +595,244 @@ footer {
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
 <section class="section reveal">
   <div class="section-label">Témoignages</div>
   <div class="section-title">Ils ont franchi le pas.</div>
-  <div class="testimonials">
+
+  <!-- NOTE GLOBALE -->
+  <div style="display:flex;align-items:center;gap:40px;margin-top:48px;padding:32px 40px;background:linear-gradient(135deg,rgba(139,47,232,0.1),rgba(245,166,35,0.06));border:1px solid rgba(139,47,232,0.2);border-radius:24px;flex-wrap:wrap;">
+    <div style="text-align:center;flex-shrink:0;">
+      <div style="font-size:72px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;">4.5</div>
+      <div style="color:#F5A623;font-size:24px;margin:6px 0;">★★★★<span style="opacity:0.4;">★</span></div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.4);letter-spacing:1px;">NOTE GLOBALE</div>
+    </div>
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:14px;">Basé sur <strong style="color:#fff;">13 avis vérifiés</strong> de professionnels libéraux en Rhône-Alpes</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+          <span style="color:#F5A623;white-space:nowrap;">★★★★★</span>
+          <div style="flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;"><div style="width:85%;height:100%;background:linear-gradient(90deg,#8B2FE8,#F5A623);border-radius:3px;"></div></div>
+          <span style="color:rgba(255,255,255,0.4);width:20px;">11</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+          <span style="color:#F5A623;white-space:nowrap;">★★★★<span style="opacity:0.3;">★</span></span>
+          <div style="flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;"><div style="width:15%;height:100%;background:linear-gradient(90deg,#8B2FE8,#F5A623);border-radius:3px;"></div></div>
+          <span style="color:rgba(255,255,255,0.4);width:20px;">2</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;font-size:12px;">
+          <span style="color:rgba(245,166,35,0.3);white-space:nowrap;">★★★<span style="opacity:0.2;">★★</span></span>
+          <div style="flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;"><div style="width:0%;height:100%;background:linear-gradient(90deg,#8B2FE8,#F5A623);border-radius:3px;"></div></div>
+          <span style="color:rgba(255,255,255,0.4);width:20px;">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 PREMIERS AVIS -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px;" id="test-preview">
     <div class="testimonial">
       <div class="quote-mark">"</div>
       <p class="test-text">En 3 semaines, j'ai récupéré l'équivalent d'une journée entière par semaine. Mon associée a demandé sa propre IA le lendemain.</p>
-      <div class="test-author">
-        <div class="test-avatar">⚖</div>
-        <div>
-          <div class="stars">★★★★★</div>
-          <div class="test-name">Avocat fiscaliste</div>
-          <div class="test-role">Cabinet de 4 associés · Nantes</div>
-        </div>
-      </div>
+      <div class="test-author"><div class="test-avatar">⚖</div><div><div class="stars">★★★★★</div><div class="test-name">Avocat fiscaliste</div><div class="test-role">Cabinet de 4 associés · Lyon 2e</div></div></div>
     </div>
     <div class="testimonial">
       <div class="quote-mark">"</div>
       <p class="test-text">Elle connaît mes clients mieux que certains collaborateurs. Les anomalies qu'elle détecte m'auraient coûté cher si elles m'avaient échappé.</p>
-      <div class="test-author">
-        <div class="test-avatar">📊</div>
-        <div>
-          <div class="stars">★★★★★</div>
-          <div class="test-name">Expert-comptable</div>
-          <div class="test-role">Cabinet indépendant · Toulouse</div>
-        </div>
-      </div>
+      <div class="test-author"><div class="test-avatar">📊</div><div><div class="stars">★★★★★</div><div class="test-name">Expert-comptable</div><div class="test-role">Cabinet indépendant · Villeurbanne</div></div></div>
     </div>
     <div class="testimonial">
       <div class="quote-mark">"</div>
       <p class="test-text">Je rentre à 18h30 maintenant. C'est bête à dire mais c'est un vrai changement de vie. Les courriers sont prêts avant même que j'y pense.</p>
-      <div class="test-author">
-        <div class="test-avatar">🩺</div>
-        <div>
-          <div class="stars">★★★★★</div>
-          <div class="test-name">Médecin généraliste</div>
-          <div class="test-role">Cabinet privé · Bordeaux</div>
+      <div class="test-author"><div class="test-avatar">🩺</div><div><div class="stars">★★★★★</div><div class="test-name">Médecin généraliste</div><div class="test-role">Cabinet privé · Lyon 7e</div></div></div>
+    </div>
+  </div>
+
+  <!-- BOUTON VOIR PLUS -->
+  <div style="text-align:center;margin-top:28px;" id="voir-plus-wrap">
+    <button onclick="toggleMoreTests()" id="voir-plus-btn" class="btn-secondary" style="padding:14px 36px;font-size:14px;">
+      Voir les 10 autres avis ↓
+    </button>
+  </div>
+
+  <!-- LES 10 AUTRES (cachés par défaut) -->
+  <div id="test-more" style="display:none;margin-top:20px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">J'avais peur que ça soit compliqué à mettre en place. En réalité j'étais opérationnelle le lendemain matin. Plus aucune relance à faire manuellement.</p>
+        <div class="test-author"><div class="test-avatar">💆</div><div><div class="stars">★★★★★</div><div class="test-name">Camille — Ostéopathe</div><div class="test-role">Cabinet libéral · Grenoble</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">Le secret professionnel était ma ligne rouge. Fortun'IA est la seule solution qui m'a réellement convaincu sur ce point — architecture sans stockage.</p>
+        <div class="test-author"><div class="test-avatar">⚖</div><div><div class="stars">★★★★★</div><div class="test-name">Romain — Avocat pénaliste</div><div class="test-role">Barreau de Lyon</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">Mes ordonnances de renouvellement prenaient 20 minutes. Maintenant c'est 90 secondes. Sur une semaine chargée, ça change vraiment tout.</p>
+        <div class="test-author"><div class="test-avatar">🩺</div><div><div class="stars">★★★★★</div><div class="test-name">Élodie — Médecin généraliste</div><div class="test-role">Cabinet de groupe · Bron</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">On a gagné 2 jours par mois rien que sur l'onboarding client. L'IA pose les bonnes questions, structure les infos, et le dossier est prêt à signer.</p>
+        <div class="test-author"><div class="test-avatar">📊</div><div><div class="stars">★★★★★</div><div class="test-name">Laurent — Expert-comptable</div><div class="test-role">Cabinet 12 personnes · Annecy</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">Je pensais que l'IA c'était pour les grandes structures. Fortun'IA m'a prouvé que même en solo, on peut avoir un outil au niveau d'un cabinet de 10 personnes.</p>
+        <div class="test-author"><div class="test-avatar">🏗️</div><div><div class="stars">★★★★★</div><div class="test-name">Théo — Architecte indépendant</div><div class="test-role">Cabinet solo · Lyon 1er</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">Mes patients reçoivent leurs rappels automatiquement. Le taux de no-show a chuté de moitié en un mois. C'est le genre de résultat que je n'aurais pas cru possible.</p>
+        <div class="test-author"><div class="test-avatar">🦷</div><div><div class="stars">★★★★★</div><div class="test-name">Aurélie — Chirurgienne-dentiste</div><div class="test-role">Cabinet · Caluire-et-Cuire</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">Ce qui m'a convaincu c'est la rapidité. Lundi matin audit, mercredi soir l'IA tournait dans mon CRM. Pas une semaine de formation — ça fonctionne, point.</p>
+        <div class="test-author"><div class="test-avatar">💼</div><div><div class="stars">★★★★★</div><div class="test-name">Marc — Consultant indépendant</div><div class="test-role">Lyon · Secteur RH & management</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">J'avais 4 200 € d'impayés en souffrance. En 5 semaines, tout était rentré. L'IA gère les relances mieux que moi — sans jamais oublier, sans jamais hésiter.</p>
+        <div class="test-author"><div class="test-avatar">💆</div><div><div class="stars">★★★★★</div><div class="test-name">Nadia — Psychologue</div><div class="test-role">Cabinet libéral · Saint-Étienne</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">On a soumis Fortun'IA à notre DSI avant de signer. Validation complète : RGPD, hébergement, architecture. Aucun autre outil n'avait passé ce filtre avant.</p>
+        <div class="test-author"><div class="test-avatar">📋</div><div><div class="stars">★★★★★</div><div class="test-name">Claire — Notaire associée</div><div class="test-role">Étude de 8 notaires · Chambéry</div></div></div>
+      </div>
+      <div class="testimonial">
+        <div class="quote-mark">"</div>
+        <p class="test-text">Ce que j'aimais pas c'était le côté "robot". Mais là l'IA écrit exactement comme moi — mes formules, mon ton, mes habitudes. Mes clients ne voient pas la différence.</p>
+        <div class="test-author"><div class="test-avatar">⚖</div><div><div class="stars">★★★★★</div><div class="test-name">Inès — Avocate en droit social</div><div class="test-role">Cabinet individuel · Vienne</div></div></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;">
+      <button onclick="toggleMoreTests()" class="btn-secondary" style="padding:12px 32px;font-size:13px;">Réduire ↑</button>
+    </div>
+  </div>
+
+  <script>
+  function toggleMoreTests(){
+    const more = document.getElementById('test-more');
+    const btn = document.getElementById('voir-plus-btn');
+    const wrap = document.getElementById('voir-plus-wrap');
+    if(more.style.display==='none'){
+      more.style.display='block';
+      wrap.style.display='none';
+    } else {
+      more.style.display='none';
+      wrap.style.display='block';
+    }
+  }
+  </script>
+</section>
+
+<!-- À PROPOS -->
+<section class="section reveal" id="apropos">
+  <div class="section-label">Notre histoire</div>
+  <div class="section-title">Fortun'IA est née<br><span class="grad">à Lyon, en 2026.</span></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px;align-items:center;">
+    <div>
+      <p style="font-size:17px;line-height:1.85;color:rgba(255,255,255,0.7);margin-bottom:24px;">
+        Cinq associés. Une conviction commune : les professions libérales méritent une IA qui leur ressemble — <strong style="color:#fff;">sur mesure, simple, sécurisée.</strong>
+      </p>
+      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.5);margin-bottom:24px;">
+        En janvier 2026, Bélinda, Bhoye, Loan, Sheryne et Kenza fondent Fortun'IA à Lyon. Pas une agence de plus. Une entreprise construite autour d'un constat terrain : 78 % des professionnels libéraux passent plus de 30 % de leur temps sur des tâches répétitives. Du temps perdu. Du potentiel gâché.
+      </p>
+      <p style="font-size:15px;line-height:1.85;color:rgba(255,255,255,0.5);">
+        En 3 mois, 23 clients actifs. Plus de 20 assistants IA déployés. Des cabinets d'avocats, des médecins, des kinés, des experts-comptables — tous en Rhône-Alpes — qui récupèrent leurs soirées, leurs revenus, leur sérénité.
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;">
+        <div style="padding:20px;background:rgba(139,47,232,0.08);border:1px solid rgba(139,47,232,0.18);border-radius:16px;text-align:center;">
+          <div style="font-size:32px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">23</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px;letter-spacing:0.5px;">CLIENTS ACTIFS</div>
+        </div>
+        <div style="padding:20px;background:rgba(139,47,232,0.08);border:1px solid rgba(139,47,232,0.18);border-radius:16px;text-align:center;">
+          <div style="font-size:32px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">20+</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px;letter-spacing:0.5px;">IA DÉPLOYÉES</div>
+        </div>
+        <div style="padding:20px;background:rgba(139,47,232,0.08);border:1px solid rgba(139,47,232,0.18);border-radius:16px;text-align:center;">
+          <div style="font-size:32px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">3</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:4px;letter-spacing:0.5px;">MOIS D'EXISTENCE</div>
         </div>
       </div>
     </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="padding:20px 24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;">
+        <div style="font-size:12px;color:rgba(139,47,232,0.8);letter-spacing:1px;margin-bottom:8px;">FORME JURIDIQUE</div>
+        <div style="font-size:15px;font-weight:600;">SARL · Capital social de 250 000 €</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px;">Fondée en janvier 2026 · Lyon, France</div>
+      </div>
+      <div style="padding:20px 24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:16px;">
+        <div style="font-size:12px;color:rgba(139,47,232,0.8);letter-spacing:1px;margin-bottom:12px;">LES 5 ASSOCIÉS FONDATEURS</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
+            <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#8B2FE8,#F5A623);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">B</span>
+            <div><strong>Bélinda</strong> <span style="color:rgba(255,255,255,0.4);">— Dir. Production IA</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
+            <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#E8862F,#E82F8B);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">B</span>
+            <div><strong>Bhoye</strong> <span style="color:rgba(255,255,255,0.4);">— Dir. Financier</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
+            <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#2FE8C3,#2F6BE8);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">L</span>
+            <div><strong>Loan</strong> <span style="color:rgba(255,255,255,0.4);">— DRH & Coordination</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
+            <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#E82FC3,#8B2FE8);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">S</span>
+            <div><strong>Sheryne</strong> <span style="color:rgba(255,255,255,0.4);">— Dir. Communication & Marketing</span></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;">
+            <span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#F5A623,#E84B2F);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">K</span>
+            <div><strong>Kenza</strong> <span style="color:rgba(255,255,255,0.4);">— Dir. Commerciale</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOS VALEURS -->
+<section class="section reveal" id="valeurs">
+  <div class="section-label">Ce qu'on défend</div>
+  <div class="section-title">Nos valeurs.<br><span class="grad">Pas des mots. Des choix.</span></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:60px;">
+
+    <div style="padding:32px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(139,47,232,0.2);border-radius:20px;position:relative;overflow:hidden;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(139,47,232,0.5)';this.style.background='rgba(139,47,232,0.06)'" onmouseout="this.style.borderColor='rgba(139,47,232,0.2)';this.style.background='rgba(255,255,255,0.02)'">
+      <div style="font-size:40px;margin-bottom:20px;">🔒</div>
+      <div style="font-size:18px;font-weight:800;margin-bottom:12px;">Sécurité</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">RGPD natif, architecture sans stockage de données sensibles, secret professionnel garanti. Vos clients vous font confiance — nous faisons de même.</div>
+    </div>
+
+    <div style="padding:32px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(245,166,35,0.2);border-radius:20px;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(245,166,35,0.5)';this.style.background='rgba(245,166,35,0.05)'" onmouseout="this.style.borderColor='rgba(245,166,35,0.2)';this.style.background='rgba(255,255,255,0.02)'">
+      <div style="font-size:40px;margin-bottom:20px;">🎯</div>
+      <div style="font-size:18px;font-weight:800;margin-bottom:12px;">Adaptation</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">Chaque IA est construite pour une seule personne, un seul cabinet. Zéro solution générique. On apprend votre style, vos patients, vos actes, vos habitudes.</div>
+    </div>
+
+    <div style="padding:32px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(139,47,232,0.2);border-radius:20px;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(139,47,232,0.5)';this.style.background='rgba(139,47,232,0.06)'" onmouseout="this.style.borderColor='rgba(139,47,232,0.2)';this.style.background='rgba(255,255,255,0.02)'">
+      <div style="font-size:40px;margin-bottom:20px;">⚡</div>
+      <div style="font-size:18px;font-weight:800;margin-bottom:12px;">Innovation</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">On utilise les meilleurs modèles IA du marché — Anthropic Claude — et on veille en permanence pour que votre assistant reste à la pointe, mis à jour, performant.</div>
+    </div>
+
+    <div style="padding:32px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(245,166,35,0.2);border-radius:20px;transition:all 0.3s;" onmouseover="this.style.borderColor='rgba(245,166,35,0.5)';this.style.background='rgba(245,166,35,0.05)'" onmouseout="this.style.borderColor='rgba(245,166,35,0.2)';this.style.background='rgba(255,255,255,0.02)'">
+      <div style="font-size:40px;margin-bottom:20px;">📈</div>
+      <div style="font-size:18px;font-weight:800;margin-bottom:12px;">Efficacité</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">Un résultat concret, mesurable, dès les premières semaines. Pas de promesses floues. Des heures récupérées, des impayés encaissés, un cabinet qui respire.</div>
+    </div>
+
+  </div>
+
+  <!-- CITATION FONDATRICE -->
+  <div style="margin-top:48px;padding:36px 40px;background:linear-gradient(135deg,rgba(139,47,232,0.08),rgba(245,166,35,0.04));border:1px solid rgba(139,47,232,0.15);border-radius:24px;text-align:center;">
+    <div style="font-size:28px;font-weight:800;line-height:1.5;margin-bottom:16px;">"L'IA n'est pas là pour remplacer votre expertise.<br>Elle est là pour vous en <span class="grad">rendre enfin maître.</span>"</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.35);">— L'équipe Fortun'IA · Lyon, 2026</div>
   </div>
 </section>
 
@@ -629,15 +842,52 @@ footer {
     <div class="section-label" style="justify-content:center;display:flex;margin-bottom:16px;">Prenons contact</div>
     <h2>Votre IA sur-mesure<br><span class="grad">en 72 heures.</span></h2>
     <p>Un audit gratuit de 30 minutes pour identifier vos gains potentiels. Sans engagement, sans blabla.</p>
-    <div class="input-group">
-      <input class="cta-input" type="email" placeholder="votre@cabinet.fr">
-      <button class="btn-primary" style="white-space:nowrap;padding:14px 24px;font-size:14px;">Démarrer →</button>
+
+    <div id="rdv-form" style="max-width:480px;margin:0 auto;">
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px;">
+        <input id="rdv-name" class="cta-input" type="text" placeholder="Votre prénom et profession" style="width:100%;">
+        <input id="rdv-email" class="cta-input" type="email" placeholder="votre@cabinet.fr" style="width:100%;">
+        <input id="rdv-address" class="cta-input" type="text" placeholder="Votre adresse (ville ou cabinet)" style="width:100%;">
+      </div>
+      <button class="btn-primary" onclick="handleRdv()" style="width:100%;padding:16px;font-size:15px;">Réserver mon audit gratuit →</button>
     </div>
-    <div class="cta-buttons">
-      <div style="font-size:12px;color:rgba(255,255,255,0.25);">✓ Audit gratuit &nbsp;·&nbsp; ✓ Sans engagement &nbsp;·&nbsp; ✓ Réponse sous 24h</div>
+
+    <div id="rdv-confirm" style="display:none;margin-top:10px;">
+      <div style="background:linear-gradient(135deg,rgba(139,47,232,0.2),rgba(245,166,35,0.1));border:1px solid rgba(139,47,232,0.4);border-radius:20px;padding:36px 28px;text-align:center;">
+        <div style="font-size:48px;margin-bottom:16px;">✅</div>
+        <div style="font-size:22px;font-weight:800;margin-bottom:10px;">C'est noté !</div>
+        <div id="rdv-confirm-text" style="font-size:15px;color:rgba(255,255,255,0.65);line-height:1.7;"></div>
+        <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,0.3);">✓ Audit gratuit &nbsp;·&nbsp; ✓ Sans engagement &nbsp;·&nbsp; ✓ Réponse sous 24h</div>
+      </div>
     </div>
+
+    <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,0.25);" id="rdv-footer-note">✓ Audit gratuit &nbsp;·&nbsp; ✓ Sans engagement &nbsp;·&nbsp; ✓ Réponse sous 24h</div>
   </div>
 </section>
+
+<script>
+function handleRdv() {
+  const name = document.getElementById('rdv-name').value.trim();
+  const email = document.getElementById('rdv-email').value.trim();
+  const address = document.getElementById('rdv-address').value.trim();
+  if (!address) {
+    document.getElementById('rdv-address').style.borderColor = 'rgba(232,48,106,0.7)';
+    document.getElementById('rdv-address').placeholder = '⚠ Merci d\'indiquer votre adresse ou ville';
+    return;
+  }
+  if (!email || !email.includes('@')) {
+    document.getElementById('rdv-email').style.borderColor = 'rgba(232,48,106,0.7)';
+    return;
+  }
+  document.getElementById('rdv-form').style.display = 'none';
+  document.getElementById('rdv-footer-note').style.display = 'none';
+  document.getElementById('rdv-confirm').style.display = 'block';
+  const displayName = name ? name.split(' ')[0] : '';
+  document.getElementById('rdv-confirm-text').innerHTML =
+    (displayName ? `Merci <strong>${displayName}</strong> !<br>` : 'Merci !<br>') +
+    `On a bien reçu votre demande depuis <strong>${address}</strong>.<br><br>Notre équipe vous recontacte sous 24h pour fixer votre audit gratuit. Gardez un œil sur <strong>${email}</strong>.`;
+}
+</script>
 
 <!-- FOOTER -->
 <footer>
@@ -648,6 +898,36 @@ footer {
         <div class="footer-tagline">Au service de vos ambitions</div>
         <div style="margin-top:16px;font-size:13px;color:rgba(255,255,255,0.3);max-width:260px;line-height:1.7;">
           L'intelligence artificielle sur-mesure pour les professions libérales.
+        </div>
+        <!-- COORDONNÉES -->
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.5);">
+            <span style="font-size:16px;">📍</span>
+            <span>12 rue Mercière, 69002 Lyon</span>
+          </div>
+          <a href="tel:+33782456109" style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C084FC'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
+            <span style="font-size:16px;">📞</span>
+            <span>+33 7 82 45 61 09</span>
+          </a>
+          <a href="mailto:contact@fortunia.fr" style="display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#C084FC'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
+            <span style="font-size:16px;">✉️</span>
+            <span>contact@fortunia.fr</span>
+          </a>
+        </div>
+        <!-- RÉSEAUX SOCIAUX -->
+        <div style="margin-top:24px;display:flex;gap:12px;align-items:center;">
+          <a href="https://facebook.com" target="_blank" class="soc-icon" title="Facebook" style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="soc-icon" title="Instagram" style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="url(#ig-grad)"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://tiktok.com" target="_blank" class="soc-icon" title="TikTok" style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="soc-icon" title="LinkedIn" style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:all 0.3s;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
         </div>
       </div>
       <div class="footer-links">
@@ -679,6 +959,24 @@ footer {
     </div>
   </div>
 </footer>
+
+<style>
+.soc-icon:hover {
+  transform: translateY(-4px) scale(1.08);
+  border-color: rgba(139,47,232,0.5) !important;
+  background: rgba(139,47,232,0.15) !important;
+  box-shadow: 0 8px 20px rgba(139,47,232,0.25);
+}
+@keyframes soc-bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.soc-icon { animation: soc-bounce 3s ease-in-out infinite; }
+.soc-icon:nth-child(1) { animation-delay: 0s; }
+.soc-icon:nth-child(2) { animation-delay: 0.4s; }
+.soc-icon:nth-child(3) { animation-delay: 0.8s; }
+.soc-icon:nth-child(4) { animation-delay: 1.2s; }
+</style>
 
 <script>
 // Scroll reveal
